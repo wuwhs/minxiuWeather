@@ -1,0 +1,153 @@
+/* miniprogram/pages/searchGeo/searchGeo.wxss */
+
+.search-container {
+  position: relative;
+}
+
+.search-box {
+  display: flex;
+  height: 60rpx;
+  align-items: center;
+  font-size: 30rpx;
+  margin-top: 10rpx;
+  padding-bottom: 20rpx;
+  box-shadow: 0 1px 2px -1px #ccc;
+}
+
+.search-box input {
+  position: relative;
+  border: 1rpx solid #ccc;
+  border-radius: 10rpx;
+  width: calc(100vw - 120rpx);
+  margin: 10rpx 20rpx;
+  box-sizing: border-box;
+  padding-left: 60rpx;
+  height: 62rpx;
+}
+
+.search-box input::before {
+  position: absolute;
+  content: "";
+  display: block;
+  width: 34rpx;
+  height: 34rpx;
+  background-image: url(https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/search_gray.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  top: 50%;
+  left: 10rpx;
+  transform: translateY(-50%);
+}
+
+.search-box .input-placeholder {
+  color: #ccc;
+}
+
+.search-box text {
+  color: #1aad16;
+  margin: 10rpx 20rpx 10rpx 0;
+}
+
+.city-list {
+  display: flex;
+  height: calc(100vh - 92rpx);
+  flex-direction: column;
+}
+
+.city-list-title,
+.city-list-item {
+  padding-left: 20rpx;
+}
+
+.city-list-title {
+  background-color: #eee;
+  font-size: 30rpx;
+  padding-top: 4rpx;
+  padding-bottom: 4rpx;
+}
+
+.guess-list {
+  display: flex;
+  flex-wrap: wrap;
+  font-size: 30rpx;
+  justify-content: space-around;
+  align-items: space-around;
+  margin: 10rpx 0;
+  color: #ffffff;
+}
+
+.guess-list image {
+  width: 28rpx;
+  height: 28rpx;
+}
+
+.guess-list > view {
+  width: 150rpx;
+  padding: 10rpx 0;
+  margin: 10rpx 20rpx;
+  background-color: rgba(0, 0, 0, .6);
+  border-radius: 8rpx;
+  text-align: center;
+  box-shadow: 0 0 1rpx 1rpx rgba(0, 0, 0, .4);
+}
+
+.city-list-item {
+  font-size: 30rpx;
+  line-height: 80rpx;
+  border-bottom: 1rpx solid #eee;
+}
+
+.sugg-container {
+  position: absolute;
+  top: 88rpx;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+}
+
+.sugg-container.no-sugg {
+  background-color: rgba(0, 0, 0, .4);
+}
+
+.sugg-container.has-sugg {
+  background-color: #ffffff;
+}
+
+.sugg-item {
+  border-bottom: 1rpx solid #ccc;
+  padding: 10rpx 20rpx;
+}
+
+.sugg-title {
+  font-size: 30rpx;
+  margin-bottom: 10rpx;
+}
+
+.sugg-desc {
+  font-size: 22rpx;
+  color: #aaa;
+}
+
+.index-bar {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 24rpx;
+  top: 88rpx;
+  right: 0;
+  bottom: 0;
+  width: 30rpx;
+  padding-top: 52rpx;
+  background-color: rgba(0, 0, 0, .2);
+  z-index: 10;
+}
+
+.index-item {
+  margin-bottom: 4rpx;
+}
+
+.index-item.active {
+  color: #1aad16;
+}

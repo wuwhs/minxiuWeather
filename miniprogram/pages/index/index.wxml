@@ -1,0 +1,96 @@
+<!--index.wxml-->
+<!-- 背景 -->
+<view class="bg" style="background-image:url({{bgImgUrl}})"></view>
+
+<view class="container">
+
+  <!-- 用户信息 -->
+  <view class="userinfo">
+    <open-data type="userAvatarUrl" class="userinfo-avatar"/>
+    <text class="userinfo-nickname">{{greetings}}，</text>
+    <open-data type="userNickName"/>
+  </view>
+
+  <!-- 实时天气信息 -->
+  <view class="now">
+
+    <view class="now-position">
+      <text catchtap="toSearchPage">{{geoDes}}</text>
+      <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png" catchtap="toSearchPage"/>
+    </view>
+
+    <view class="now-tmp">
+      <text class="now-tmp--num">{{nowWeather.tmp}}</text>
+      <text>℃</text>
+    </view>
+
+    <view class="now-cond">
+      <image src="{{nowWeather.condIconUrl}}"/>
+      <text> {{nowWeather.condTxt}}</text>
+    </view>
+
+    <view class="now-items">
+      <view class="now-items--left">
+        <view>{{nowWeather.windDir}} {{nowWeather.windSc}}级</view>
+        <view>湿度 {{nowWeather.hum}}</view>
+      </view>
+      <view class="now-items--right">
+        <view>大气压 {{nowWeather.pres}}</view>
+        <view>降水量 {{nowWeather.pcpn}}</view>
+      </view>
+    </view>
+
+    <view class="now-time">
+      <text>更新于 {{nowWeather.loc}}</text>
+    </view>
+  </view>
+
+  <!-- 预测天气 -->
+  <view class="forecast-container">
+    <view class="forecast-title">近三天预报</view>
+    <view class="forecast">
+      <view wx:for="{{days}}" wx:key="index" class="forecast-column">
+        <view class="forecast-day">{{item}}</view>
+        <block if="{{dailyWeather.length}}">
+          <view>{{dailyWeather[index].date}}</view>
+          <view>{{dailyWeather[index].condTxtD}}</view>
+          <view>
+            <image src="{{dailyWeather[index].condDIconUrl}}" class="forecast-icon" mode="aspectFit"/>
+          </view>
+          <view>{{dailyWeather[index].tmpMin}}℃~{{dailyWeather[index].tmpMax}}℃</view>
+          <view>
+            <image src="{{dailyWeather[index].condNIconUrl}}" class="forecast-icon"/>
+          </view>
+          <view>{{dailyWeather[index].condTxtN}}</view>
+          <view>{{dailyWeather[index].windDir}}</view>
+          <view>风速{{dailyWeather[index].windSc}}级</view>
+        </block>
+      </view>
+    </view>
+  </view>
+
+  <!-- 生活指数 -->
+  <view class="lifestyle-container">
+    <view class="lifestyle-title">生活指数</view>
+    <view class="lifestyle">
+      <block wx:if="lifestyle.length">
+        <view wx:for="{{lifestyle}}" wx:key="{{index}}">
+          <view class="lifestyle-item--pic">
+            <image class="lifestyle-icon" src="{{lifestyle[index].iconUrl}}" />
+          </view>
+          <view class="lifestyle-item--txt">
+            <view>{{lifestyle[index].iconTxt}}：{{lifestyle[index].brf}}</view>
+            <view class="lifestyle-item--desc">{{lifestyle[index].txt}}</view>
+          </view>
+        </view>
+      </block>
+      <view ></view>
+    </view>
+  </view>
+
+  <!-- copyright -->
+  <view class="copyright">
+    <text>developed by wuwhs</text>
+    <text>, api by heweather.com</text>
+  </view>
+</view>
