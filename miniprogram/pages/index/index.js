@@ -33,6 +33,8 @@ Page({
 
     dailyWeather: [], // 逐日天气数据
 
+    hourlyWeather: [], // 逐三小时天气数据
+
     lifestyle: [] // 生活指数
   },
 
@@ -62,7 +64,6 @@ Page({
 
   // 下拉刷新
   onPullDownRefresh () {
-
     this.init()
     wx.stopPullDownRefresh()
   },
@@ -84,6 +85,9 @@ Page({
 
     // 获取逐日天气
     await this.getDailyWeather()
+
+    // 获取逐三小时天气
+    await this.getHourlyWeather()
 
     // 获取生活指数
     await this.getLifestyle()
@@ -236,6 +240,53 @@ Page({
 
     this.setData({
       dailyWeather
+    })
+  },
+
+  // 获取逐三小时天气
+  getHourlyWeather () {
+    return new Promise((resolve, reject) => {
+      api.getHourlyWeather({
+        location: this.data.location
+      })
+        .then((res) => {
+          let data = res.HeWeather6[0].hourly
+          this.formaHourlyWeather(data)
+          resolve()
+        })
+        .catch((err) => {
+          console.error(err.message)
+          reject(err.message)
+        })
+    })
+  },
+
+  // 格式化逐三小时天气
+  formaHourlyWeather (data) {
+    let formatData = data.reduce((pre, cur) => {
+      pre.push({
+        date: cur.time.split(' ')[1],
+        condIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code}.png`, // 天气图标
+        condTxt: cur.cond_txt, // 天气状况描述
+        tmp: cur.tmp, // 气温
+        windDir: cur.wind_dir, // 风向
+        windSc: cur.wind_sc, // 风力
+        windSpd: cur.wind_spd, // 风速
+        pres: cur.pres // 大气压
+      })
+
+      return pre
+    }, [])
+
+    let gap = 4
+    let trip = Math.ceil(formatData.length / gap)
+    let hourlyWeather = []
+    for(let i = 0; i < trip; i++) {
+      hourlyWeather.push(formatData.slice(i * gap, (i + 1) * gap))
+    }
+    console.log('hourlyWeather:', hourlyWeather)
+    this.setData({
+      hourlyWeather
     })
   },
 

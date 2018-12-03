@@ -2,6 +2,7 @@
 const app = getApp()
 const config = app.globalData.config
 const api = app.globalData.api
+const util = app.globalData.util
 const loading = app.globalData.loading
 const regeneratorRuntime = require('../../lib/regenerator')
 const indexBar = config.indexBar
@@ -79,19 +80,30 @@ Page({
     })
   },
 
+  scroll: util.throttle(() => {
+    let query = wx.createSelectorQuery()
+    let $title = query.selectAll('.city-list-title')
+    $title.boundingClientRect((rects) => {
+      console.log('rects:', rects)
+    })
+    query.exec()
+  }, 800),
+
   // 城市列表滚动
-  scroll (event) {
+  /* scroll (event) {
     let scrollTop = event.detail.scrollTop
     let indexList = this.data.indexList
     let index = indexList.findIndex((item) => {
       return scrollTop < item.offsetHeight
     })
+    console.log('scroll...')
 
     if (index === -1) {
       index = indexList.length
     }
     this.setIndex(index - 1)
-  },
+
+  }, */
 
   // 点击索引条
   tapIndexItem (event) {

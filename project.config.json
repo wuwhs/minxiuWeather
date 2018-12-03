@@ -11,7 +11,7 @@
 	},
 	"appid": "wxc79844a2be0a4406",
 	"projectname": "minxiuWeather",
-	"libVersion": "2.4.0",
+	"libVersion": "2.4.1",
 	"condition": {
 		"search": {
 			"current": -1,

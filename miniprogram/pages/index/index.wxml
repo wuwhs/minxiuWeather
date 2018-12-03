@@ -45,6 +45,29 @@
     </view>
   </view>
 
+  <!-- 逐三小时天气 -->
+  <view class="hourly-container">
+    <view class="hourly-title">逐三小时预报</view>
+    <swiper class="hourly" indicator-active-color="#ffffff" next-margin="40rpx">
+      <block wx:for="{{hourlyWeather}}" wx:for-index="times" wx:for-item="trip" wx:key="{{times}}">
+        <swiper-item class="hourly-swiper-item">
+          <block wx:for="{{trip}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+            <view class="hourly-swiper-column">
+              <view>{{item.date}}</view>
+              <view>{{item.condTxt}}</view>
+              <view>
+                <image class="forecast-icon" src="{{item.condIconUrl}}" />
+              </view>
+              <view>{{item.tmp}}℃</view>
+              <view>{{item.windDir}}</view>
+              <view>风速{{item.windSc}}级</view>
+            </view>
+          </block>
+        </swiper-item>
+      </block>
+    </swiper>
+  </view>
+
   <!-- 预测天气 -->
   <view class="forecast-container">
     <view class="forecast-title">近三天预报</view>
@@ -84,13 +107,12 @@
           </view>
         </view>
       </block>
-      <view ></view>
     </view>
   </view>
 
   <!-- copyright -->
   <view class="copyright">
     <text>developed by wuwhs</text>
-    <text>, api by heweather.com</text>
+    <text>, api by heweather</text>
   </view>
 </view>

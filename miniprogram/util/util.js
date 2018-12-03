@@ -19,6 +19,20 @@ const getGreetings = () => {
   return `${w}好`
 }
 
+// 节流
+const throttle = (fn,delay) => {
+  let lastTime = 0
+  return () => {
+    let nowTime = Date.now()
+    console.log('nowTime - lastTime:', nowTime - lastTime)
+    if (nowTime - lastTime > delay || !lastTime) {
+      lastTime = nowTime
+      fn()
+    }
+  }
+}
+
 module.exports = {
-  getGreetings
+  getGreetings,
+  throttle
 }

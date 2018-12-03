@@ -120,12 +120,25 @@
   margin-right: 20rpx;
 }
 
-.forecast-container, .lifestyle-container {
+.hourly {
+  padding: 20rpx 0;
+}
+
+.hourly-swiper-item {
+  display: flex;
+  justify-content: space-around;
+}
+
+.hourly-container,
+.forecast-container,
+.lifestyle-container {
   text-align: center;
   background-color: rgba(0, 0, 0, .4);
 }
 
-.forecast-title, .lifestyle-title {
+.hourly-title,
+.forecast-title,
+.lifestyle-title {
   width: 100%;
   padding: 20rpx 0;
   border-bottom: 1rpx solid #ccc;
@@ -138,6 +151,7 @@
   justify-content: space-around;
 }
 
+.hourly .forecast-icon,
 .forecast .forecast-icon {
   width: 60rpx;
   height: 60rpx;
@@ -155,6 +169,7 @@
 .lifestyle {
   display: flex;
   flex-direction: column;
+  padding-bottom: 20rpx;
 }
 
 .lifestyle > view {
@@ -189,4 +204,6 @@
   justify-content: center;
   font-size: 20rpx;
   padding: 20rpx 0;
+  border-top: 1rpx solid #ccc;
+  background-color: rgba(0, 0, 0, .4);
 }

@@ -87,6 +87,26 @@ const getDailyWeather = (option) => {
   })
 }
 
+// 逐三小时天气
+const getHourlyWeather = (option) => {
+  return new Promise((resolve, reject) => {
+    wx.request({
+      url: config.hourlyWeatherUrl,
+      method: 'GET',
+      data: {
+        ...commonParam,
+        ...option
+      },
+      success (res) {
+        resolve(res.data)
+      },
+      fail (err) {
+        reject(err)
+      }
+    })
+  })
+}
+
 // 生活指数
 const getLifestyle = (option) => {
   return new Promise((resolve, reject) => {
@@ -174,6 +194,7 @@ module.exports = {
   reverseGeocoder,
   getNowWeather,
   getDailyWeather,
+  getHourlyWeather,
   getLifestyle,
   getCityList,
   getSuggestion
