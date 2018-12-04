@@ -122,11 +122,16 @@
 
 .hourly {
   padding: 20rpx 0;
+  height: 400rpx;
 }
 
 .hourly-swiper-item {
   display: flex;
   justify-content: space-around;
+}
+
+.hourly-swiper-column > view {
+  margin-bottom: 10rpx;
 }
 
 .hourly-container,

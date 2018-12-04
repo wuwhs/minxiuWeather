@@ -22,12 +22,11 @@ const getGreetings = () => {
 // 节流
 const throttle = (fn,delay) => {
   let lastTime = 0
-  return () => {
+  return function () {
     let nowTime = Date.now()
-    console.log('nowTime - lastTime:', nowTime - lastTime)
     if (nowTime - lastTime > delay || !lastTime) {
+      fn.call(this)
       lastTime = nowTime
-      fn()
     }
   }
 }

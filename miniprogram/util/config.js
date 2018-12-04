@@ -4,9 +4,9 @@ const HEWEATHER_API = 'https://free-api.heweather.com/s6/weather'
 
 module.exports = {
   // 和风天气个人开发key
-  weatherKey: '80aee8fc9d954ce296125f7901da3b36',
+  weatherKey: '',
   // 腾讯地图开发key
-  qqMapKey: '3QMBZ-UW3RJ-6TLFQ-FSP5Z-WPDYV-FXBIJ',
+  qqMapKey: '',
   // 实时天气接口地址
   nowWeatherUrl: `${HEWEATHER_API}/now`,
   // 逐日天气接口地址
@@ -16,7 +16,7 @@ module.exports = {
   // 生活指数接口地址
   lifestyleUrl: `${HEWEATHER_API}/lifestyle`,
   // 天气图标基地址
-  COND_ICON_BASE_URL: 'https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/cond-icon',
+  COND_ICON_BASE_URL: 'https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/cond-white',
   // 背景图片基地址
   BG_IMG_BASE_URL: 'https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/bg',
 
@@ -157,98 +157,5 @@ module.exports = {
     }
   },
   // 右侧索引条
-  indexBar: [
-    {
-      txt: '#',
-      offsetHeight: 0
-    },
-    {
-      txt: 'A',
-      offsetHeight: 114
-    },
-    {
-      txt: 'B',
-      offsetHeight: 630
-    },
-    {
-      txt: 'C',
-      offsetHeight: 1843
-    },
-    {
-      txt: 'D',
-      offsetHeight: 2892
-    },
-    {
-      txt: 'E',
-      offsetHeight: 3982
-    },
-    {
-      txt: 'F',
-      offsetHeight: 4129
-    },
-    {
-      txt: 'G',
-      offsetHeight: 4686
-    },
-    {
-      txt: 'H',
-      offsetHeight: 5243
-    },
-    {
-      txt: 'J',
-      offsetHeight: 7194
-    },
-    {
-      txt: 'K',
-      offsetHeight: 8653
-    },
-    {
-      txt: 'L',
-      offsetHeight: 9046
-    },
-    {
-      txt: 'M',
-      offsetHeight: 10505
-    },
-    {
-      txt: 'N',
-      offsetHeight: 10939
-    },
-    {
-      txt: 'P',
-      offsetHeight: 11701
-    },
-    {
-      txt: 'Q',
-      offsetHeight: 12299
-    },
-    {
-      txt: 'R',
-      offsetHeight: 13143
-    },
-    {
-      txt: 'S',
-      offsetHeight: 13290
-    },
-    {
-      txt: 'T',
-      offsetHeight: 14872
-    },
-    {
-      txt: 'W',
-      offsetHeight: 16003
-    },
-    {
-      txt: 'X',
-      offsetHeight: 17011
-    },
-    {
-      txt: 'Y',
-      offsetHeight: 18224
-    },
-    {
-      txt: 'Z',
-      offsetHeight: 19724
-    }
-  ]
+  indexBar: [ '#', 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N', 'P', 'Q', 'R', 'S', 'T', 'W', 'X', 'Y', 'Z']
 }

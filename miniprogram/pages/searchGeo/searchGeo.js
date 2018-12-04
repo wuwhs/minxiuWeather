@@ -20,7 +20,8 @@ Page({
     barIndex: 0, // 右边索引条索引值
     suggList: [], // 搜索提示列表
     isShowSugg: false, // 是否显示搜索遮罩
-    searchCls: 'no-sugg' // 没有提示的样式
+    searchCls: 'no-sugg', // 没有提示的样式
+    title: null
   },
 
   // 加载提示
@@ -80,37 +81,33 @@ Page({
     })
   },
 
-  scroll: util.throttle(() => {
-    let query = wx.createSelectorQuery()
-    let $title = query.selectAll('.city-list-title')
-    $title.boundingClientRect((rects) => {
-      console.log('rects:', rects)
-    })
-    query.exec()
-  }, 800),
-
   // 城市列表滚动
-  /* scroll (event) {
-    let scrollTop = event.detail.scrollTop
-    let indexList = this.data.indexList
-    let index = indexList.findIndex((item) => {
-      return scrollTop < item.offsetHeight
-    })
-    console.log('scroll...')
-
-    if (index === -1) {
-      index = indexList.length
-    }
-    this.setIndex(index - 1)
-
-  }, */
+  scroll: util.throttle(function () {
+    wx.createSelectorQuery().selectAll('.city-list-title')
+    .boundingClientRect((rects) => {
+      let index = rects.findIndex((item) => {
+        return item.top >= 0
+      })
+      if (index === -1) {
+        index = rects.length
+      }
+      this.setIndex(index - 1)
+    }).exec()
+  }, 20),
 
   // 点击索引条
   tapIndexItem (event) {
-    let index = event.currentTarget.dataset.item
+    let id = event.currentTarget.dataset.item
     this.setData({
-      scrollIntoViewId: `title_${index === '#' ? 0 : index}`
+      scrollIntoViewId: `title_${id === '#' ? 0 : id}`
     })
+
+    // 延时设置索引条焦点
+    setTimeout(() => {
+      this.setData({
+        barIndex: this.data.indexList.findIndex((item) => item === id)
+      })
+    }, 500)
   },
 
   // 取消
@@ -187,9 +184,13 @@ Page({
 
   // 设置索引号
   setIndex (index) {
-    this.setData({
-      barIndex: index
-    })
+    if (this.data.barIndex === index) {
+      return false
+    } else {
+      this.setData({
+        barIndex: index
+      })
+    }
   },
 
   // 获取当前定位

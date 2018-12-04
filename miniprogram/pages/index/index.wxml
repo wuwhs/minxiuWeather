@@ -48,7 +48,7 @@
   <!-- 逐三小时天气 -->
   <view class="hourly-container">
     <view class="hourly-title">逐三小时预报</view>
-    <swiper class="hourly" indicator-active-color="#ffffff" next-margin="40rpx">
+    <swiper class="hourly" indicator-active-color="#ffffff" indicator-dots="{{true}}">
       <block wx:for="{{hourlyWeather}}" wx:for-index="times" wx:for-item="trip" wx:key="{{times}}">
         <swiper-item class="hourly-swiper-item">
           <block wx:for="{{trip}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
