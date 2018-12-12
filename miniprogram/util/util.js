@@ -1,3 +1,4 @@
+// 问候语
 const getGreetings = () => {
   let h = new Date().getHours()
   let w = ''
@@ -20,12 +21,12 @@ const getGreetings = () => {
 }
 
 // 节流
-const throttle = (fn,delay) => {
+const throttle = function(fn, delay) {
   let lastTime = 0
   return function () {
     let nowTime = Date.now()
     if (nowTime - lastTime > delay || !lastTime) {
-      fn.call(this)
+      fn.apply(this, arguments)
       lastTime = nowTime
     }
   }

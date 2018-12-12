@@ -52,8 +52,8 @@ Page({
         resolve()
       })
         .catch((err) => {
-          console.error(err.message)
-          reject(err.message)
+          console.error(err)
+          reject(err)
         })
     })
   },
@@ -84,15 +84,15 @@ Page({
   // 城市列表滚动
   scroll: util.throttle(function () {
     wx.createSelectorQuery().selectAll('.city-list-title')
-    .boundingClientRect((rects) => {
-      let index = rects.findIndex((item) => {
-        return item.top >= 0
-      })
-      if (index === -1) {
-        index = rects.length
-      }
-      this.setIndex(index - 1)
-    }).exec()
+      .boundingClientRect((rects) => {
+        let index = rects.findIndex((item) => {
+          return item.top >= 0
+        })
+        if (index === -1) {
+          index = rects.length
+        }
+        this.setIndex(index - 1)
+      }).exec()
   }, 20),
 
   // 点击索引条
@@ -128,8 +128,8 @@ Page({
   },
 
   // 输入搜索关键字
-  input (event) {
-    let val = event.detail.value
+  input: util.throttle(function () {
+    let val = arguments[0].detail.value
     if (val === '') {
       this.setData({
         suggList: []
@@ -145,13 +145,12 @@ Page({
         this.setData({
           suggList: res
         })
-        console.log('search location:', res)
         this.changeSearchCls()
       })
       .catch((err) => {
-        console.error(err.message)
+        console.error(err)
       })
-  },
+  }, 500),
 
   // 改变提示样式
   changeSearchCls () {

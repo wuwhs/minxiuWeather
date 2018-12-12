@@ -25,7 +25,7 @@ Page({
       pres: '', // 大气压
       hum: '', // 湿度
       pcpn: '', // 降水量
-      condIconUrl: `${COND_ICON_BASE_URL}/999.png?_=20181204`, // 天气图标
+      condIconUrl: `${COND_ICON_BASE_URL}/999.png`, // 天气图标
       loc: '' // 当地时间
     },
 
@@ -122,7 +122,7 @@ Page({
         })
       })
       .catch((err) => {
-        console.error(err.message)
+        console.error(err)
       })
   },
 
@@ -150,8 +150,8 @@ Page({
           resolve()
         })
         .catch((err) => {
-          console.error(err.message)
-          reject(err.message)
+          console.error(err)
+          reject(err)
         })
     })
   },
@@ -170,7 +170,7 @@ Page({
         pres: data.now.pres,
         hum: data.now.hum,
         pcpn: data.now.pcpn,
-        condIconUrl: `${COND_ICON_BASE_URL}/${data.now.cond_code}.png?_=20181204`,
+        condIconUrl: `${COND_ICON_BASE_URL}/${data.now.cond_code}.png`,
         loc: data.update.loc.slice(5).replace(/-/, '/')
       }
     })
@@ -209,8 +209,8 @@ Page({
           resolve()
         })
         .catch((err) => {
-          console.error(err.message)
-          reject(err.message)
+          console.error(err)
+          reject(err)
         })
     })
   },
@@ -220,8 +220,8 @@ Page({
     let dailyWeather = data.reduce((pre, cur) => {
       pre.push({
         date: cur.date.slice(5).replace(/-/, '/'),
-        condDIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_d}.png?_=20181204`, //白天天气状况图标
-        condNIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_n}.png?_=20181204`, //晚间天气状况图标
+        condDIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_d}.png`, //白天天气状况图标
+        condNIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_n}.png`, //晚间天气状况图标
         condTxtD: cur.cond_txt_d, // 白天天气状况描述
         condTxtN: cur.cond_txt_n, // 晚间天气状况描述
         sr: cur.sr, // 日出时间
@@ -255,8 +255,8 @@ Page({
           resolve()
         })
         .catch((err) => {
-          console.error(err.message)
-          reject(err.message)
+          console.error(err)
+          reject(err)
         })
     })
   },
@@ -266,7 +266,7 @@ Page({
     let formatData = data.reduce((pre, cur) => {
       pre.push({
         date: cur.time.split(' ')[1],
-        condIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code}.png?_=20181204`, // 天气图标
+        condIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code}.png`, // 天气图标
         condTxt: cur.cond_txt, // 天气状况描述
         tmp: cur.tmp, // 气温
         windDir: cur.wind_dir, // 风向
@@ -284,7 +284,7 @@ Page({
     for(let i = 0; i < trip; i++) {
       hourlyWeather.push(formatData.slice(i * gap, (i + 1) * gap))
     }
-    console.log('hourlyWeather:', hourlyWeather)
+
     this.setData({
       hourlyWeather
     })
@@ -302,8 +302,8 @@ Page({
           resolve()
         })
         .catch((err) => {
-          console.error(err.message)
-          reject(err.message)
+          console.error(err)
+          reject(err)
         })
     })
   },
