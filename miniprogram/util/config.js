@@ -3,7 +3,7 @@ const LIFESTYLE_BASE_URL = 'https://6465-demo-57510e-1257978613.tcb.qcloud.la/mi
 const HEWEATHER_API = 'https://free-api.heweather.com/s6/weather'
 
 module.exports = {
-  // 和风天气个人开发key
+  // 和风天气个人开发key 对外提供 d469334ef67548578d65268f148b046f
   weatherKey: '',
   // 腾讯地图开发key
   qqMapKey: '',
