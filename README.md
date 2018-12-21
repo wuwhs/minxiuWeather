@@ -1,7 +1,7 @@
 
 # Minxiu Weather
 
-Minxiu Weather是个人开发的一款简单天气小程序。天气数据从[和风天气](https://www.heweather.com)，对个人开发者开放的一些接口获取的。有关地址搜索和城市选择功能对接的[腾讯位置服务-微信小程序JavaScript SDK](https://lbs.qq.com/qqmap_wx_jssdk/index.html)。这两者都需要注册获取相应的 key 才可以顺利使用，请使用时更改成自己账号的 key。
+Minxiu Weather 是个人开发的一款简单天气小程序。天气数据从[和风天气](https://www.heweather.com)，对个人开发者开放的一些接口获取的。有关地址搜索和城市选择功能对接的[腾讯位置服务-微信小程序JavaScript SDK](https://lbs.qq.com/qqmap_wx_jssdk/index.html)。这两者都需要注册获取相应的 key 才可以顺利使用，请使用时更改成自己账号的 key。
 
 现在已发布小程序V1.0.2，后续功能会持续跟上，欢迎扫码体验哈~
 
@@ -11,7 +11,7 @@ Minxiu Weather是个人开发的一款简单天气小程序。天气数据从[�
 
 ## 报错：key不能为空
 
-由于位置服务使用的[腾讯位置服务-微信小程序JavaScript SDK](https://lbs.qq.com/qqmap_wx_jssdk/index.html)，请自行申请自己的密钥（`key`）。审核通过后授权给当前要使用的微信小程序（`APP ID`）,还需将微信小程序域名`servicewechat.com` 添加到白名单。
+由于位置服务使用的[腾讯位置服务-微信小程序JavaScript SDK](https://lbs.qq.com/qqmap_wx_jssdk/index.html)，请自行申请自己的密钥（`key`）。审核通过后授权给当前要使用的微信小程序（`APP ID`）,还需将微信小程序域名 `servicewechat.com` 添加到白名单。
 
 ![lbs-key](/images/lbs-key.png)
 
@@ -19,7 +19,7 @@ Minxiu Weather是个人开发的一款简单天气小程序。天气数据从[�
 
 ## 报错：Cannot read property 'parent_city' of undefined;
 
-天气API是[和风天气](https://www.heweather.com)提供，需要自行申请密钥（`key`）,请到项目 `/miniprogram/util/config.js` 修改和风天气个人开发 `key`。为了大家方便（申请个人开发者需要提供作品审核可能需要时间），我在这提供一个个人的开发 `key`：`d469334ef67548578d65268f148b046f` ，勿乱用哈~
+天气 `API` 是[和风天气](https://www.heweather.com)提供，需要自行申请密钥（`key`）,请到项目 `/miniprogram/util/config.js` 修改和风天气个人开发 `key`。为了大家方便（申请个人开发者需要提供作品审核可能需要时间），我在这提供一个个人的开发 `key`：`d469334ef67548578d65268f148b046f` ，勿乱滥用哈~
 
 ## 报错：https://free-api.heweather.com 不在以下 request 合法域名列
 
