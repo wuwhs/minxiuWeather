@@ -11,7 +11,7 @@
 	},
 	"appid": "",
 	"projectname": "minxiuWeather",
-	"libVersion": "2.4.1",
+	"libVersion": "2.4.2",
 	"condition": {
 		"search": {
 			"current": -1,
@@ -29,14 +29,8 @@
 			"list": []
 		},
 		"miniprogram": {
-			"current": 0,
-			"list": [
-				{
-					"id": -1,
-					"name": "db guide",
-					"pathName": "pages/databaseGuide/databaseGuide"
-				}
-			]
+			"current": -1,
+			"list": []
 		}
 	}
 }
