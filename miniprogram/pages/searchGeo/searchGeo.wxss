@@ -18,11 +18,23 @@
   position: relative;
   border: 1rpx solid #ccc;
   border-radius: 10rpx;
-  width: calc(100vw - 120rpx);
+  width: calc(100vw - 20rpx);
   margin: 10rpx 20rpx;
   box-sizing: border-box;
   padding-left: 60rpx;
   height: 62rpx;
+}
+
+.search-box .cancel {
+  display: none;
+}
+
+.search-box.focus input {
+  width: calc(100vw - 120rpx);
+}
+
+.search-box.focus .cancel {
+  display: inline;
 }
 
 .search-box input::before {
@@ -66,22 +78,21 @@
   padding-bottom: 4rpx;
 }
 
-.guess-list {
-  display: flex;
-  flex-wrap: wrap;
-  font-size: 30rpx;
-  justify-content: space-around;
-  align-items: space-around;
-  margin: 10rpx 0;
-  color: #ffffff;
-}
-
 .guess-list image {
   width: 28rpx;
   height: 28rpx;
 }
 
-.guess-list > view {
+.guess-line {
+  display: flex;
+  justify-content: space-around;
+  align-items: space-around;
+  margin: 10rpx 0;
+  color: #ffffff;
+  font-size: 30rpx;
+}
+
+.guess-line > view {
   width: 150rpx;
   padding: 10rpx 0;
   margin: 10rpx 20rpx;

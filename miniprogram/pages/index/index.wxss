@@ -150,10 +150,7 @@
 }
 
 .forecast {
-  width: 100%;
   padding: 20rpx 0;
-  display: flex;
-  justify-content: space-around;
 }
 
 .hourly .forecast-icon,
@@ -162,13 +159,19 @@
   height: 60rpx;
 }
 
-.forecast-column {
-  width: 30%;
+.forecast-items {
+  white-space: nowrap;
+  margin-bottom: 10rpx;
 }
 
-.forecast-column > view {
-  text-align: center;
-  margin-bottom: 10rpx;
+.forecast-items > view {
+  display: inline-block;
+  width: 180rpx;
+}
+
+.canvasWeather {
+  position: absolute;
+  transform: translateX(-200%);
 }
 
 .lifestyle {

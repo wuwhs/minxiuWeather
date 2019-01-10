@@ -68,28 +68,53 @@
     </swiper>
   </view>
 
+  <!-- 广告 -->
+  <ad unit-id="adunit-f4c3c82b43a4aa1b"></ad>
+
   <!-- 预测天气 -->
   <view class="forecast-container">
-    <view class="forecast-title">近三天预报</view>
-    <view class="forecast">
-      <view wx:for="{{days}}" wx:key="index" class="forecast-column">
-        <view class="forecast-day">{{item}}</view>
-        <block if="{{dailyWeather.length}}">
-          <view>{{dailyWeather[index].date}}</view>
-          <view>{{dailyWeather[index].condTxtD}}</view>
-          <view>
-            <image src="{{dailyWeather[index].condDIconUrl}}" class="forecast-icon" mode="aspectFit"/>
+    <view class="forecast-title">近七天预报</view>
+    <scroll-view scroll-x>
+      <view class="forecast">
+        <!-- 日期 -->
+        <view class="forecast-items">
+          <view class="forecast-day" wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.parseDate}}</view>
+        </view>
+        <!-- 白天天气 -->
+        <view class="forecast-items">
+          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.condTxtD}}</view>
+        </view>
+        <!-- 白天图标 -->
+        <view class="forecast-items">
+          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">
+            <image src="{{item.condDIconUrl}}" class="forecast-icon" mode="aspectFit"/>
           </view>
-          <view>{{dailyWeather[index].tmpMin}}℃~{{dailyWeather[index].tmpMax}}℃</view>
-          <view>
-            <image src="{{dailyWeather[index].condNIconUrl}}" class="forecast-icon"/>
+        </view>
+        <!-- 气温 -->
+        <view class="forecast-items">
+          <image src="{{canvasSrc}}" style="width: {{canvasWidth}}px; height: 150px;"/>
+        </view>
+        <!-- 晚间图标 -->
+        <view class="forecast-items">
+          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">
+            <image src="{{item.condNIconUrl}}" class="forecast-icon"/>
           </view>
-          <view>{{dailyWeather[index].condTxtN}}</view>
-          <view>{{dailyWeather[index].windDir}}</view>
-          <view>风速{{dailyWeather[index].windSc}}级</view>
-        </block>
+        </view>
+        <!-- 晚间天气 -->
+        <view class="forecast-items">
+          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.condTxtN}}</view>
+        </view>
+        <!-- 风向 -->
+        <view class="forecast-items">
+          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.windDir}}</view>
+        </view>
+        <!-- 风力 -->
+        <view class="forecast-items">
+          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">风速{{item.windSc}}级</view>
+        </view>
       </view>
-    </view>
+      <canvas canvas-id="canvasWeather" class="canvasWeather" style="width: {{canvasWidth}}px; height: 150px;" disable-scroll="true"></canvas>
+    </scroll-view>
   </view>
 
   <!-- 生活指数 -->

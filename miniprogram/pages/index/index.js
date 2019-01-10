@@ -8,6 +8,7 @@ const COND_ICON_BASE_URL = config.COND_ICON_BASE_URL
 const BG_IMG_BASE_URL = config.BG_IMG_BASE_URL
 // 为了用`async await`
 const regeneratorRuntime = require('../../lib/regenerator')
+const wxCharts = require('../../lib/wxchart')
 
 Page({
   data: {
@@ -30,6 +31,10 @@ Page({
     },
 
     days: ['今天', '明天', '后天'],
+
+    canvasWidth: 0,
+
+    canvasSrc: '',
 
     dailyWeather: [], // 逐日天气数据
 
@@ -206,6 +211,7 @@ Page({
         .then((res) => {
           let data = res.HeWeather6[0].daily_forecast
           this.formatDailyWeather(data)
+          this.getDailyContainer()
           resolve()
         })
         .catch((err) => {
@@ -217,9 +223,12 @@ Page({
 
   // 格式化逐日天气数据
   formatDailyWeather (data) {
-    let dailyWeather = data.reduce((pre, cur) => {
+    let dailyWeather = data.reduce((pre, cur, index) => {
+      let date = cur.date.slice(5).replace(/-/, '/')
+
       pre.push({
-        date: cur.date.slice(5).replace(/-/, '/'),
+        date: date,
+        parseDate: this.data.days[index] ? this.data.days[index] : date,
         condDIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_d}.png`, //白天天气状况图标
         condNIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_n}.png`, //晚间天气状况图标
         condTxtD: cur.cond_txt_d, // 白天天气状况描述
@@ -241,6 +250,99 @@ Page({
     this.setData({
       dailyWeather
     })
+  },
+
+  // 获取逐日天气容器宽
+  getDailyContainer () {
+    let temperatureData = this.formatTemperatureData(this.data.dailyWeather)
+
+    wx.createSelectorQuery().select('.forecast-day')
+    .fields({
+      size: true
+    }).exec((res) => {
+      this.drawTemperatureLine({
+        temperatureData,
+        diagramWidth: res[0].width * 7
+      })
+    })
+  },
+
+  // 绘制气温折线图
+  drawTemperatureLine (data) {
+    let {temperatureData, diagramWidth} = data
+    let rate = wx.getSystemInfoSync().windowWidth / 375
+
+    // 设置绘制 canvas 宽度
+    this.setData({
+      canvasWidth: diagramWidth
+    })
+
+    new wxCharts({
+      canvasId: 'canvasWeather',
+      type: 'line',
+      categories: temperatureData.dateArr,
+      animation: false,
+      config: {
+        fontSize: 16 * rate,
+        color: "#ffffff"
+      },
+      series: [{
+        name: '最高气温',
+        data: temperatureData.tmpMaxArr,
+        fontOffset: 18 * rate,
+        format: function (val, name) {
+          return val + '℃'
+        }
+      }, {
+        name: '最低气温',
+        data: temperatureData.tmpMinArr,
+        fontOffset: -8 * rate,
+        format: function (val, name) {
+          return val + '℃'
+        }
+      }],
+      xAxis: {
+        disableGrid: true
+      },
+      yAxis: {
+        disabled: true
+      },
+      width: diagramWidth,
+      height: 200,
+      dataLabel: true,
+      dataPointShape: true,
+      extra: {
+        lineStyle: 'curve'
+      }
+    })
+
+    this.canvasToImg()
+  },
+
+  // 将 canvas 复制到图片
+  canvasToImg () {
+    setTimeout(() => {
+      wx.canvasToTempFilePath({
+        canvasId: 'canvasWeather',
+        success: (res) => {
+            var shareTempFilePath = res.tempFilePath;
+            this.setData({
+              canvasSrc: shareTempFilePath
+            })
+        }
+      })
+    }, 500)
+  },
+
+  // 格式化气温数据用于绘制折线图
+  formatTemperatureData (data) {
+    return data.reduce((pre, cur) => {
+      let { date, tmpMax, tmpMin } = cur
+      pre.dateArr.push(date)
+      pre.tmpMaxArr.push(tmpMax)
+      pre.tmpMinArr.push(tmpMin)
+      return pre
+    }, {dateArr: [], tmpMaxArr: [], tmpMinArr: []})
   },
 
   // 获取逐三小时天气
@@ -281,7 +383,7 @@ Page({
     let gap = 4
     let trip = Math.ceil(formatData.length / gap)
     let hourlyWeather = []
-    for(let i = 0; i < trip; i++) {
+    for (let i = 0; i < trip; i++) {
       hourlyWeather.push(formatData.slice(i * gap, (i + 1) * gap))
     }
 

@@ -15,6 +15,8 @@ Page({
     initValue: '', // 搜索框初始值
     cityList: [], // 城市列表
     filterCities: [], // 想查找城市列表
+    filterLine1: [],
+    filterLine2: [],
     indexList: indexBar, // 右侧索引条数据
     scrollIntoViewId: 'title_0', // 滚动到可视区索引标题id
     barIndex: 0, // 右边索引条索引值
@@ -75,6 +77,8 @@ Page({
         }
       })
       this.setData({
+        filterLine1: filterCities.slice(0, 2),
+        filterLine2: filterCities.slice(2),
         filterCities
       })
       resolve()

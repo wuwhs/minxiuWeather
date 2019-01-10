@@ -1,21 +1,28 @@
 <!-- miniprogram/pages/searchGeo/searchGeo.wxml -->
 <view class="search-container">
   <!-- 搜索框 -->
-  <view class="search-box">
+  <view class="search-box {{isShowSugg ? 'focus' : ''}}">
     <input placeholder="请输入城市关键字搜索" placeholder-class="input-placeholder" bindfocus="focus" bindinput="input" id="input" confirm-type="search" value="{{initValue}}" />
-    <text bindtap="cancelSearch">取消</text>
+    <text class="cancel" bindtap="cancelSearch">取消</text>
   </view>
 
   <scroll-view scroll-y="{{true}}" class="city-list" scroll-with-animation="{{true}}" scroll-into-view="{{scrollIntoViewId}}" bindscroll="scroll">
     <!-- 猜你想找 -->
     <view class="city-list-title" id="title_0" ># 猜你想找</view>
     <view class="guess-list">
-      <view bindtap="tapSetCurPos">定位
-        <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png"/>
+      <view class="guess-line">
+        <view bindtap="tapSetCurPos">定位
+          <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png"/>
+        </view>
+        <block wx:if="{{filterLine1.length}}">
+          <view class="guess-list-item" wx:for="{{filterLine1}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
+        </block>
       </view>
-      <block wx:if="{{filterCities.length}}">
-        <view class="guess-list-item" wx:for="{{filterCities}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
-      </block>
+      <view class="guess-line">
+        <block wx:if="{{filterLine2.length}}">
+          <view class="guess-list-item" wx:for="{{filterLine2}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
+        </block>
+      </view>
     </view>
 
     <!-- 城市列表 -->
