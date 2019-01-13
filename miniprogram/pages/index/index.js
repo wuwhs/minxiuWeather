@@ -284,12 +284,14 @@ Page({
       animation: false,
       config: {
         fontSize: 16 * rate,
-        color: "#ffffff"
+        color: "#ffffff",
+        paddingX: 0,
+        paddingY: 30 * rate
       },
       series: [{
         name: '最高气温',
         data: temperatureData.tmpMaxArr,
-        fontOffset: 18 * rate,
+        fontOffset: -8 * rate,
         format: function (val, name) {
           return val + '℃'
         }
