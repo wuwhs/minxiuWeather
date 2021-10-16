@@ -15,18 +15,18 @@
           <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png"/>
         </view>
         <block wx:if="{{filterLine1.length}}">
-          <view class="guess-list-item" wx:for="{{filterLine1}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
+          <view class="guess-list-item" wx:for="{{filterLine1}}" wx:key="index" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
         </block>
       </view>
       <view class="guess-line">
         <block wx:if="{{filterLine2.length}}">
-          <view class="guess-list-item" wx:for="{{filterLine2}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
+          <view class="guess-list-item" wx:for="{{filterLine2}}" wx:key="index" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>
         </block>
       </view>
     </view>
 
     <!-- 城市列表 -->
-    <block wx:for="{{cityList}}" wx:key="{{index}}">
+    <block wx:for="{{cityList}}" wx:key="index">
       <block wx:if="{{index === 0 || (cityList[index - 1].initial[0] !== item.initial[0])}}">
         <view class="city-list-title" id="{{'title_' + item.initial[0]}}">{{item.initial[0]}}</view>
       </block>
@@ -36,13 +36,13 @@
 
   <!-- 索引条 -->
   <view class="index-bar">
-    <view class="index-item {{(barIndex === index) ? 'active' : ''}}" wx:for="{{indexList}}" wx:key="{{index}}" bindtap="tapIndexItem" data-item="{{item}}">{{item}}</view>
+    <view class="index-item {{(barIndex === index) ? 'active' : ''}}" wx:for="{{indexList}}" wx:key="index" bindtap="tapIndexItem" data-item="{{item}}">{{item}}</view>
   </view>
 
   <!-- 搜索提示 -->
   <scroll-view class="sugg-container {{searchCls}}" scroll-y="{{true}}" scroll-with-animation="{{true}}" style="display:{{isShowSugg ? 'flex' : 'none'}};">
     <view class="sugg-list">
-      <view class="sugg-item" wx:for="{{suggList}}" wx:key="{{index}}" data-item="{{item}}" bindtap="tapSuggItem">
+      <view class="sugg-item" wx:for="{{suggList}}" wx:key="index" data-item="{{item}}" bindtap="tapSuggItem">
         <view class="sugg-title">{{item.title}}</view>
         <view class="sugg-desc">{{item.address}}</view>
       </view>

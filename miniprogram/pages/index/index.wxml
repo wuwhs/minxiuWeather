@@ -49,9 +49,9 @@
   <view class="hourly-container">
     <view class="hourly-title">逐三小时预报</view>
     <swiper class="hourly" indicator-active-color="#ffffff" indicator-dots="{{true}}">
-      <block wx:for="{{hourlyWeather}}" wx:for-index="times" wx:for-item="trip" wx:key="{{times}}">
+      <block wx:for="{{hourlyWeather}}" wx:for-index="times" wx:for-item="trip" wx:key="times">
         <swiper-item class="hourly-swiper-item">
-          <block wx:for="{{trip}}" wx:for-item="item" wx:for-index="index" wx:key="{{index}}">
+          <block wx:for="{{trip}}" wx:for-item="item" wx:for-index="index" wx:key="index">
             <view class="hourly-swiper-column">
               <view>{{item.date}}</view>
               <view>{{item.condTxt}}</view>
@@ -78,15 +78,15 @@
       <view class="forecast">
         <!-- 日期 -->
         <view class="forecast-items">
-          <view class="forecast-day" wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.parseDate}}</view>
+          <view class="forecast-day" wx:for="{{dailyWeather}}" wx:key="index">{{item.parseDate}}</view>
         </view>
         <!-- 白天天气 -->
         <view class="forecast-items">
-          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.condTxtD}}</view>
+          <view wx:for="{{dailyWeather}}" wx:key="index">{{item.condTxtD}}</view>
         </view>
         <!-- 白天图标 -->
         <view class="forecast-items">
-          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">
+          <view wx:for="{{dailyWeather}}" wx:key="index">
             <image src="{{item.condDIconUrl}}" class="forecast-icon" mode="aspectFit"/>
           </view>
         </view>
@@ -96,21 +96,21 @@
         </view>
         <!-- 晚间图标 -->
         <view class="forecast-items">
-          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">
+          <view wx:for="{{dailyWeather}}" wx:key="index">
             <image src="{{item.condNIconUrl}}" class="forecast-icon"/>
           </view>
         </view>
         <!-- 晚间天气 -->
         <view class="forecast-items">
-          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.condTxtN}}</view>
+          <view wx:for="{{dailyWeather}}" wx:key="index">{{item.condTxtN}}</view>
         </view>
         <!-- 风向 -->
         <view class="forecast-items">
-          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">{{item.windDir}}</view>
+          <view wx:for="{{dailyWeather}}" wx:key="index">{{item.windDir}}</view>
         </view>
         <!-- 风力 -->
         <view class="forecast-items">
-          <view wx:for="{{dailyWeather}}" wx:key="{{index}}">风速{{item.windSc}}级</view>
+          <view wx:for="{{dailyWeather}}" wx:key="index">风速{{item.windSc}}级</view>
         </view>
       </view>
       <canvas canvas-id="canvasWeather" class="canvasWeather" style="width: {{canvasWidth}}px; height: 150px;" disable-scroll="true"></canvas>
@@ -122,7 +122,7 @@
     <view class="lifestyle-title">生活指数</view>
     <view class="lifestyle">
       <block wx:if="lifestyle.length">
-        <view wx:for="{{lifestyle}}" wx:key="{{index}}">
+        <view wx:for="{{lifestyle}}" wx:key="index">
           <view class="lifestyle-item--pic">
             <image class="lifestyle-icon" src="{{lifestyle[index].iconUrl}}" />
           </view>
