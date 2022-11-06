@@ -8,7 +8,7 @@
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "Minxiu Weather",
-    "navigationBarTextStyle": "black"
+    "navigationBarTextStyle": "white"
   },
   "cloud": true,
   "permission": {
