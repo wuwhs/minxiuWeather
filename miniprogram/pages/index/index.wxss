@@ -14,11 +14,12 @@
 .container {
   font-size: 32rpx;
   color: #ffffff;
+  background-image: linear-gradient(#53619b, #B28A72);
 }
 
 .userinfo {
-  margin-top: 40rpx;
-  height: 140rpx;
+  /* margin-top: 40rpx; */
+  /* height: 140rpx; */
   width: 100%;
   display: flex;
   flex-direction: row;
@@ -45,40 +46,50 @@
 
 .now {
   width: 100%;
-  margin-top: 20rpx;
+  /* margin-top: 20rpx; */
 }
 
 .now-position {
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 40rpx;
+  font-size: 34rpx;
   margin-bottom: 20rpx;
 }
 
-.now-position image {
-  width: 28rpx;
-  height: 28rpx;
+.now-tmp-cond {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10rpx;
 }
 
 .now-tmp {
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  margin-bottom: 20rpx;
 }
 
 .now-tmp--num {
   font-size: 120rpx;
+  line-height: 1;
 }
 
 .now-cond {
   display: flex;
   justify-content: center;
   align-items: center;
+  font-size: 32rpx;
+  align-items: flex-end;
   margin-bottom: 20rpx;
-  font-size: 40rpx;
-  margin-bottom: 20rpx;
+}
+
+.now-time {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 28rpx;
+  /* margin-bottom: 20rpx; */
+  margin-right: 20rpx;
+  flex-grow: 1;
 }
 
 .now-cond image {
@@ -93,7 +104,8 @@
 .now-items {
   display: flex;
   justify-content: center;
-  margin-bottom: 20rpx;
+  /* margin-bottom: 20rpx; */
+  font-size: 28rpx;
 }
 
 .now-items--left,
@@ -102,22 +114,14 @@
   box-sizing: border-box;
 }
 
-.now-items--left > view,
-.now-items--right > view {
+.now-items--left>view,
+.now-items--right>view {
   margin: 10rpx 20rpx;
 }
 
 .now-items--left {
   text-align: right;
   border-right: 1px solid #ffffff;
-}
-
-.now-time {
-  display: flex;
-  justify-content: flex-end;
-  font-size: 28rpx;
-  margin-bottom: 20rpx;
-  margin-right: 20rpx;
 }
 
 .hourly {
@@ -130,7 +134,7 @@
   justify-content: space-around;
 }
 
-.hourly-swiper-column > view {
+.hourly-swiper-column>view {
   margin-bottom: 10rpx;
 }
 
@@ -155,8 +159,7 @@
 
 .hourly .forecast-icon,
 .forecast .forecast-icon {
-  width: 60rpx;
-  height: 60rpx;
+  font-size: 50rpx;
 }
 
 .forecast-items {
@@ -164,7 +167,7 @@
   margin-bottom: 10rpx;
 }
 
-.forecast-items > view {
+.forecast-items>view {
   display: inline-block;
   width: 180rpx;
 }
@@ -180,7 +183,7 @@
   padding-bottom: 20rpx;
 }
 
-.lifestyle > view {
+.lifestyle>view {
   display: flex;
   margin: 20rpx 20rpx 0;
 }

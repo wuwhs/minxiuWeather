@@ -17,7 +17,8 @@ Page({
     location: '', // 地理坐标
     geoDes: '定位中...', // 地理位置描述
 
-    nowWeather: { // 实时天气数据
+    nowWeather: {
+      // 实时天气数据
       tmp: 'N/A', // 温度
       condTxt: '', // 天气状况
       windDir: '', // 风向
@@ -46,53 +47,53 @@ Page({
   // 加载提示
   ...loading,
 
-  onShow () {
+  onShow() {
     this.init()
   },
 
   // 初始化
-  init () {
+  init() {
     this.showLoading()
     this.initGreetings()
     this.initWeatherInfo()
   },
 
   // 允许分享
-  onShareAppMessage () { },
+  onShareAppMessage() { },
 
   // 跳到搜索页
-  toSearchPage () {
+  toSearchPage() {
     wx.navigateTo({
       url: '/pages/searchGeo/searchGeo'
     })
   },
 
   // 下拉刷新
-  onPullDownRefresh () {
+  onPullDownRefresh() {
     this.init()
     wx.stopPullDownRefresh()
   },
 
   // 初始化问候语
-  initGreetings () {
+  initGreetings() {
     this.setData({
       greetings: util.getGreetings()
     })
   },
 
   // 初始化天气信息
-  async initWeatherInfo () {
+  async initWeatherInfo() {
     // 获取地址信息
     await this.getLocation()
 
     // 获取实时天气
     await this.getNowWeather()
 
-    // 获取逐日天气
-    await this.getDailyWeather()
-
     // 获取逐三小时天气
     await this.getHourlyWeather()
+
+    // 获取逐日天气
+    await this.getDailyWeather()
 
     // 获取生活指数
     await this.getLifestyle()
@@ -102,7 +103,7 @@ Page({
   },
 
   // 获取地理位置信息
-  async getLocation () {
+  async getLocation() {
     let position = wx.getStorageSync('POSITION')
     position = position ? JSON.parse(position) : position
 
@@ -111,10 +112,11 @@ Page({
         location: `${position.longitude},${position.latitude}`,
         geoDes: position.title
       })
-      return;
+      return
     }
 
-    await api.getLocation()
+    await api
+      .getLocation()
       .then((res) => {
         let { longitude, latitude } = res
         this.setData({
@@ -132,7 +134,7 @@ Page({
   },
 
   // 逆地址获取地址描述
-  getGeoDes (option) {
+  getGeoDes(option) {
     api.reverseGeocoder(option).then((res) => {
       let addressComponet = res.address_component
       let geoDes = `${addressComponet.city}${addressComponet.district}${addressComponet.street_number}`
@@ -143,15 +145,14 @@ Page({
   },
 
   // 获取实时天气
-  getNowWeather () {
+  getNowWeather() {
     return new Promise((resolve, reject) => {
-      api.getNowWeather({
-        location: this.data.location
-      })
+      api
+        .getNowWeather({
+          location: this.data.location
+        })
         .then((res) => {
-          let data = res.HeWeather6[0]
-          this.formatNowWeather(data)
-          this.initBgImg(data.now.cond_code)
+          this.formatNowWeather(res.now)
           resolve()
         })
         .catch((err) => {
@@ -162,35 +163,25 @@ Page({
   },
 
   // 格式化实时天气数据
-  formatNowWeather (data) {
+  formatNowWeather(data) {
     this.setData({
       nowWeather: {
-        parentCity: data.basic.parent_city,
-        location: data.basic.location,
-        tmp: data.now.tmp,
-        condTxt: data.now.cond_txt,
-        windDir: data.now.wind_dir,
-        windSc: data.now.wind_sc,
-        windSpd: data.now.wind_spd,
-        pres: data.now.pres,
-        hum: data.now.hum,
-        pcpn: data.now.pcpn,
-        condIconUrl: `${COND_ICON_BASE_URL}/${data.now.cond_code}.png`,
-        loc: data.update.loc.slice(5).replace(/-/, '/')
+        ...data,
+        obsTime: new Date(data.obsTime).toTimeString().slice(0, 5)
       }
     })
   },
 
   // 初始化背景（导航和内容）
-  initBgImg (code) {
+  initBgImg(code) {
     let cur = config.bgImgList.find((item) => {
       return item.codes.includes(parseInt(code))
     })
-    let url = BG_IMG_BASE_URL + (cur ? `/${cur.name}` : '/calm') + '.jpg'
+    // let url = BG_IMG_BASE_URL + (cur ? `/${cur.name}` : '/calm') + '.jpg'
 
-    this.setData({
-      bgImgUrl: url
-    })
+    // this.setData({
+    //   bgImgUrl: url
+    // })
 
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
@@ -203,14 +194,15 @@ Page({
   },
 
   // 获取逐日天气
-  getDailyWeather () {
+  getDailyWeather() {
     return new Promise((resolve, reject) => {
-      api.getDailyWeather({
-        location: this.data.location
-      })
+      api
+        .getDailyWeather({
+          location: this.data.location
+        })
         .then((res) => {
-          let data = res.HeWeather6[0].daily_forecast
-          this.formatDailyWeather(data)
+          // let data = res.HeWeather6[0].daily_forecast
+          this.formatDailyWeather(res.daily)
           this.getDailyContainer()
           resolve()
         })
@@ -222,26 +214,14 @@ Page({
   },
 
   // 格式化逐日天气数据
-  formatDailyWeather (data) {
+  formatDailyWeather(data) {
     let dailyWeather = data.reduce((pre, cur, index) => {
-      let date = cur.date.slice(5).replace(/-/, '/')
+      let date = cur.fxDate.slice(5).replace(/-/, '/')
 
       pre.push({
+        ...cur,
         date: date,
         parseDate: this.data.days[index] ? this.data.days[index] : date,
-        condDIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_d}.png`, //白天天气状况图标
-        condNIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code_n}.png`, //晚间天气状况图标
-        condTxtD: cur.cond_txt_d, // 白天天气状况描述
-        condTxtN: cur.cond_txt_n, // 晚间天气状况描述
-        sr: cur.sr, // 日出时间
-        ss: cur.ss, // 日落时间
-        tmpMax: cur.tmp_max, // 最高温度
-        tmpMin: cur.tmp_min, // 最低气温
-        windDir: cur.wind_dir, // 风向
-        windSc: cur.wind_sc, // 风力
-        windSpd: cur.wind_spd, // 风速
-        pres: cur.pres, // 大气压
-        vis: cur.vis // 能见度
       })
 
       return pre
@@ -253,23 +233,25 @@ Page({
   },
 
   // 获取逐日天气容器宽
-  getDailyContainer () {
+  getDailyContainer() {
     let temperatureData = this.formatTemperatureData(this.data.dailyWeather)
 
-    wx.createSelectorQuery().select('.forecast-day')
-    .fields({
-      size: true
-    }).exec((res) => {
-      this.drawTemperatureLine({
-        temperatureData,
-        diagramWidth: res[0].width * 7
+    wx.createSelectorQuery()
+      .select('.forecast-day')
+      .fields({
+        size: true
       })
-    })
+      .exec((res) => {
+        this.drawTemperatureLine({
+          temperatureData,
+          diagramWidth: res[0].width * 7
+        })
+      })
   },
 
   // 绘制气温折线图
-  drawTemperatureLine (data) {
-    let {temperatureData, diagramWidth} = data
+  drawTemperatureLine(data) {
+    let { temperatureData, diagramWidth } = data
     let rate = wx.getSystemInfoSync().windowWidth / 375
 
     // 设置绘制 canvas 宽度
@@ -284,25 +266,28 @@ Page({
       animation: false,
       config: {
         fontSize: 16 * rate,
-        color: "#ffffff",
+        color: '#ffffff',
         paddingX: 0,
         paddingY: 30 * rate
       },
-      series: [{
-        name: '最高气温',
-        data: temperatureData.tmpMaxArr,
-        fontOffset: -8 * rate,
-        format: function (val, name) {
-          return val + '℃'
+      series: [
+        {
+          name: '最高气温',
+          data: temperatureData.tempMaxArr,
+          fontOffset: -8 * rate,
+          format: function (val, name) {
+            return val + '℃'
+          }
+        },
+        {
+          name: '最低气温',
+          data: temperatureData.tempMinArr,
+          fontOffset: -8 * rate,
+          format: function (val, name) {
+            return val + '℃'
+          }
         }
-      }, {
-        name: '最低气温',
-        data: temperatureData.tmpMinArr,
-        fontOffset: -8 * rate,
-        format: function (val, name) {
-          return val + '℃'
-        }
-      }],
+      ],
       xAxis: {
         disableGrid: true
       },
@@ -322,40 +307,44 @@ Page({
   },
 
   // 将 canvas 复制到图片
-  canvasToImg () {
+  canvasToImg() {
     setTimeout(() => {
       wx.canvasToTempFilePath({
         canvasId: 'canvasWeather',
         success: (res) => {
-            var shareTempFilePath = res.tempFilePath;
-            this.setData({
-              canvasSrc: shareTempFilePath
-            })
+          var shareTempFilePath = res.tempFilePath
+          this.setData({
+            canvasSrc: shareTempFilePath
+          })
         }
       })
     }, 500)
   },
 
   // 格式化气温数据用于绘制折线图
-  formatTemperatureData (data) {
-    return data.reduce((pre, cur) => {
-      let { date, tmpMax, tmpMin } = cur
-      pre.dateArr.push(date)
-      pre.tmpMaxArr.push(tmpMax)
-      pre.tmpMinArr.push(tmpMin)
-      return pre
-    }, {dateArr: [], tmpMaxArr: [], tmpMinArr: []})
+  formatTemperatureData(data) {
+    return data.reduce(
+      (pre, cur) => {
+        let { date, tempMax, tempMin } = cur
+        pre.dateArr.push(date)
+        pre.tempMaxArr.push(tempMax)
+        pre.tempMinArr.push(tempMin)
+        return pre
+      },
+      { dateArr: [], tempMaxArr: [], tempMinArr: [] }
+    )
   },
 
-  // 获取逐三小时天气
-  getHourlyWeather () {
+  // 获取逐小时天气
+  getHourlyWeather() {
     return new Promise((resolve, reject) => {
-      api.getHourlyWeather({
-        location: this.data.location
-      })
+      api
+        .getHourlyWeather({
+          location: this.data.location
+        })
         .then((res) => {
-          let data = res.HeWeather6[0].hourly
-          this.formaHourlyWeather(data)
+          // let data = res.HeWeather6[0].hourly
+          this.formaHourlyWeather(res.hourly)
           resolve()
         })
         .catch((err) => {
@@ -366,19 +355,12 @@ Page({
   },
 
   // 格式化逐三小时天气
-  formaHourlyWeather (data) {
+  formaHourlyWeather(data) {
     let formatData = data.reduce((pre, cur) => {
       pre.push({
-        date: cur.time.split(' ')[1],
-        condIconUrl: `${COND_ICON_BASE_URL}/${cur.cond_code}.png`, // 天气图标
-        condTxt: cur.cond_txt, // 天气状况描述
-        tmp: cur.tmp, // 气温
-        windDir: cur.wind_dir, // 风向
-        windSc: cur.wind_sc, // 风力
-        windSpd: cur.wind_spd, // 风速
-        pres: cur.pres // 大气压
+        ...cur,
+        date: new Date(cur.fxTime).toTimeString().slice(0, 2),
       })
-
       return pre
     }, [])
 
@@ -395,14 +377,19 @@ Page({
   },
 
   // 获取生活指数
-  getLifestyle () {
+  getLifestyle() {
     return new Promise((resolve, reject) => {
-      api.getLifestyle({
-        location: this.data.location
-      })
+      api
+        .getLifestyle({
+          location: this.data.location,
+          type: '0'
+        })
         .then((res) => {
-          let data = res.HeWeather6[0].lifestyle
-          this.formatLifestyle(data)
+          // let data = res.HeWeather6[0].lifestyle
+          // this.formatLifestyle(res.daily)
+          this.setData({
+            lifestyle: res.daily
+          })
           resolve()
         })
         .catch((err) => {
@@ -413,7 +400,7 @@ Page({
   },
 
   // 格式化生活指数数据
-  formatLifestyle (data) {
+  formatLifestyle(data) {
     const lifestyleImgList = config.lifestyleImgList
     let lifestyle = data.reduce((pre, cur) => {
       pre.push({

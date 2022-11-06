@@ -19,10 +19,10 @@ const getLocation = () => {
   return new Promise((resolve, reject) => {
     wx.getLocation({
       type: 'gcj02',
-      success (res) {
+      success(res) {
         resolve(res)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -37,10 +37,10 @@ const reverseGeocoder = (option) => {
         latitude: option.latitude,
         longitude: option.longitude
       },
-      success (res) {
+      success(res) {
         resolve(res.result)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -57,10 +57,10 @@ const getNowWeather = (option) => {
         ...commonParam,
         ...option
       },
-      success (res) {
+      success(res) {
         resolve(res.data)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -77,10 +77,10 @@ const getDailyWeather = (option) => {
         ...commonParam,
         ...option
       },
-      success (res) {
+      success(res) {
         resolve(res.data)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -97,10 +97,10 @@ const getHourlyWeather = (option) => {
         ...commonParam,
         ...option
       },
-      success (res) {
+      success(res) {
         resolve(res.data)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -117,10 +117,10 @@ const getLifestyle = (option) => {
         ...commonParam,
         ...option
       },
-      success (res) {
+      success(res) {
         resolve(res.data)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -143,7 +143,7 @@ const sortCityList = (data) => {
   }, [])
 
   d.sort((a, b) => {
-    return (a.initial > b.initial) ? 1 : -1
+    return a.initial > b.initial ? 1 : -1
   })
 
   return d
@@ -159,7 +159,7 @@ const getCityList = () => {
 
   return new Promise((resolve, reject) => {
     qqMapWX.getCityList({
-      success (res) {
+      success(res) {
         let cityList = sortCityList(res.result[1] || [])
         wx.setStorage({
           key: 'CITY_LIST',
@@ -167,7 +167,7 @@ const getCityList = () => {
         })
         resolve(cityList)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
@@ -179,10 +179,10 @@ const getSuggestion = (option) => {
   return new Promise((resolve, reject) => {
     qqMapWX.getSuggestion({
       ...option,
-      success (res) {
+      success(res) {
         resolve(res.data)
       },
-      fail (err) {
+      fail(err) {
         reject(err)
       }
     })
