@@ -29,16 +29,17 @@
       "outputPath": ""
     },
     "enableEngineNative": false,
-    "useIsolateContext": true,
+    "useIsolateContext": false,
     "userConfirmedBundleSwitch": false,
     "packNpmManually": false,
     "packNpmRelationList": [],
     "minifyWXSS": true,
     "disableUseStrict": false,
     "showES6CompileOption": false,
-    "useCompilerPlugins": false
+    "useCompilerPlugins": false,
+    "minifyWXML": true
   },
-  "appid": "",
+  "appid": "wxc79844a2be0a4406",
   "projectname": "minxiuWeather",
   "libVersion": "2.5.0",
   "condition": {
