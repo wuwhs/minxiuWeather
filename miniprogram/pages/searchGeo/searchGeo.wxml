@@ -12,7 +12,7 @@
     <view class="guess-list">
       <view class="guess-line">
         <view bindtap="tapSetCurPos">定位
-          <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png"/>
+          <!-- <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png"/> -->
         </view>
         <block wx:if="{{filterLine1.length}}">
           <view class="guess-list-item" wx:for="{{filterLine1}}" wx:key="index" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>

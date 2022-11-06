@@ -43,7 +43,7 @@
   display: block;
   width: 34rpx;
   height: 34rpx;
-  background-image: url(https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/search_gray.png);
+  /* background-image: url(https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/search_gray.png); */
   background-repeat: no-repeat;
   background-size: cover;
   top: 50%;
