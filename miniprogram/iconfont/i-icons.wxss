@@ -1,0 +1,43 @@
+
+@import "./i-face.wxss";
+
+.iconfont {
+    font-family: "iconfont" !important;
+    font-style: normal;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  .icon-refresh:before {
+    content: "\e6a2";
+  }
+  
+  .icon-shushidu:before {
+    content: "\e70b";
+  }
+  
+  .icon-shouye:before {
+    content: "\e616";
+  }
+  
+  .icon-yundong:before {
+    content: "\e60a";
+  }
+  
+  .icon-lvyou:before {
+    content: "\e60c";
+  }
+  
+  .icon-iconyihuifu-:before {
+    content: "\e618";
+  }
+  
+  .icon-xiche:before {
+    content: "\e668";
+  }
+  
+  .icon-clothes:before {
+    content: "\e8c7";
+  }
+  
+  

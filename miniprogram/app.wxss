@@ -1,5 +1,6 @@
 /**app.wxss**/
 @import "./iconfont/qweather-icons.wxss";
+@import "./iconfont/i-icons.wxss";
 
 page {
   /* background: #f6f6f6; */
