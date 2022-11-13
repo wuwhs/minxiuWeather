@@ -2,7 +2,7 @@
 <!-- 背景 -->
 <!-- <view class="bg" style="background-image:url({{bgImgUrl}})"></view> -->
 
-<view class="container">
+<view class="container" style="background-image:linear-gradient({{bgColor}}, #B28A72);">
 
   <!-- 用户信息 -->
   <view class="userinfo">
@@ -10,7 +10,8 @@
     <text class="userinfo-nickname">{{greetings}}，</text>
     <open-data type="userNickName" />
     <view class="now-time">
-      <text>🔄 {{nowWeather.obsTime}}</text>
+      <i class="iconfont icon-refresh"></i>
+      <text>{{nowWeather.obsTime}}</text>
     </view>
   </view>
 
@@ -41,7 +42,7 @@
         <view>大气压 {{nowWeather.pressure}}</view>
         <view>降水量 {{nowWeather.precip}}</view>
       </view>
-    </view>    
+    </view>
   </view>
 
   <!-- 逐三小时天气 -->
@@ -86,17 +87,17 @@
         <!-- 白天图标 -->
         <view class="forecast-items">
           <view wx:for="{{dailyWeather}}" wx:key="index">
-            <i class="forecast-icon qi-{{item.iconDay}}"></i>            
+            <i class="forecast-icon qi-{{item.iconDay}}"></i>
           </view>
         </view>
         <!-- 气温 -->
         <view class="forecast-items">
-          <image src="{{canvasSrc}}" style="width: {{canvasWidth}}px; height: 150px;"/>
+          <image src="{{canvasSrc}}" style="width: {{canvasWidth}}px; height: 150px;" />
         </view>
         <!-- 晚间图标 -->
         <view class="forecast-items">
           <view wx:for="{{dailyWeather}}" wx:key="index">
-            <i class="forecast-icon qi-{{item.iconNight}}"></i>    
+            <i class="forecast-icon qi-{{item.iconNight}}"></i>
           </view>
         </view>
         <!-- 晚间天气 -->
@@ -117,22 +118,22 @@
   </view>
 
   <!-- 生活指数 -->
-  <!-- <view class="lifestyle-container">
+  <view class="lifestyle-container">
     <view class="lifestyle-title">生活指数</view>
     <view class="lifestyle">
       <block wx:if="lifestyle.length">
         <view wx:for="{{lifestyle}}" wx:key="index">
           <view class="lifestyle-item--pic">
-            <image class="lifestyle-icon" src="{{lifestyle[index].iconUrl}}" />
+            <i class="iconfont lifestyle-icon icon-{{lifestyle[index].iconName}}"></i>
           </view>
           <view class="lifestyle-item--txt">
-            <view>{{lifestyle[index].iconTxt}}：{{lifestyle[index].brf}}</view>
-            <view class="lifestyle-item--desc">{{lifestyle[index].txt}}</view>
+            <view>{{lifestyle[index].name}}：{{lifestyle[index].category}}</view>
+            <view class="lifestyle-item--desc">{{lifestyle[index].text}}</view>
           </view>
         </view>
       </block>
     </view>
-  </view> -->
+  </view>
 
   <!-- copyright -->
   <view class="copyright">

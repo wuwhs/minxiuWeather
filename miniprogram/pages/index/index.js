@@ -13,7 +13,7 @@ const wxCharts = require('../../lib/wxchart')
 Page({
   data: {
     greetings: '', // 问候语
-    bgImgUrl: BG_IMG_BASE_URL + '/calm.jpg', // 背景图片地址
+    bgColor: '#53619b', // 背景
     location: '', // 地理坐标
     geoDes: '定位中...', // 地理位置描述
 
@@ -109,7 +109,7 @@ Page({
 
     if (position) {
       this.setData({
-        location: `${position.longitude},${position.latitude}`,
+        location: `${position.longitude.toFixed(2)},${position.latitude.toFixed(2)}`,
         geoDes: position.title
       })
       return
@@ -120,7 +120,7 @@ Page({
       .then((res) => {
         let { longitude, latitude } = res
         this.setData({
-          location: `${longitude},${latitude}`
+          location: `${longitude.toFixed(2)},${latitude.toFixed(2)}`
         })
         // 逆地址获取地址描述
         this.getGeoDes({
@@ -170,6 +170,7 @@ Page({
         obsTime: new Date(data.obsTime).toTimeString().slice(0, 5)
       }
     })
+    this.initBgImg(data.icon)
   },
 
   // 初始化背景（导航和内容）
@@ -177,15 +178,15 @@ Page({
     let cur = config.bgImgList.find((item) => {
       return item.codes.includes(parseInt(code))
     })
-    // let url = BG_IMG_BASE_URL + (cur ? `/${cur.name}` : '/calm') + '.jpg'
-
-    // this.setData({
-    //   bgImgUrl: url
-    // })
+    if (cur) {
+      this.setData({
+        bgColor: cur.color
+      })
+    }
 
     wx.setNavigationBarColor({
       frontColor: '#ffffff',
-      backgroundColor: cur.color,
+      backgroundColor: cur ? cur.color : '#53619b',
       animation: {
         duration: 400,
         timingFunc: 'easeIn'
@@ -382,14 +383,10 @@ Page({
       api
         .getLifestyle({
           location: this.data.location,
-          type: '0'
+          type: '1,2,3,6,8,9,14'
         })
         .then((res) => {
-          // let data = res.HeWeather6[0].lifestyle
-          // this.formatLifestyle(res.daily)
-          this.setData({
-            lifestyle: res.daily
-          })
+          this.formatLifestyle(res.daily)
           resolve()
         })
         .catch((err) => {
@@ -404,10 +401,8 @@ Page({
     const lifestyleImgList = config.lifestyleImgList
     let lifestyle = data.reduce((pre, cur) => {
       pre.push({
-        brf: cur.brf,
-        txt: cur.txt,
-        iconUrl: lifestyleImgList[cur.type].src,
-        iconTxt: lifestyleImgList[cur.type].txt
+        ...cur,
+        iconName: lifestyleImgList[cur.type]
       })
       return pre
     }, [])
