@@ -128,38 +128,13 @@ module.exports = {
 
   // 生活指数
   lifestyleImgList: {
-    comf: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_comf.png`,
-      txt: '舒适度指数'
-    },
-    drsg: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_drsg.png`,
-      txt: '穿衣指数'
-    },
-    flu: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_flu.png`,
-      txt: '感冒指数'
-    },
-    sport: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_sport.png`,
-      txt: '运动指数'
-    },
-    trav: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_trav.png`,
-      txt: '旅游指数'
-    },
-    uv: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_uv.png`,
-      txt: '紫外线指数'
-    },
-    cw: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_cw.png`,
-      txt: '洗车指数'
-    },
-    air: {
-      src: `${LIFESTYLE_BASE_URL}/lifestyle_air.png`,
-      txt: '晾晒指数'
-    }
+    1: 'yundong',
+    2: 'xiche',
+    3: 'clothes',
+    6: 'lvyou',
+    8: 'shushidu',
+    9: 'shouye',
+    14: 'iconyihuifu-'
   },
   // 右侧索引条
   indexBar: [
