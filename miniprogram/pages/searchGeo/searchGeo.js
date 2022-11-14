@@ -171,8 +171,8 @@ Page({
       'POSITION',
       JSON.stringify({
         title: title,
-        longitude: location.lat,
-        latitude: location.lng
+        longitude: location.lng,
+        latitude: location.lat
       })
     )
     this.navigateToIndex()
@@ -210,8 +210,8 @@ Page({
       'POSITION',
       JSON.stringify({
         title: fullname,
-        longitude: location.lat,
-        latitude: location.lng
+        longitude: location.lng,
+        latitude: location.lat
       })
     )
     this.navigateToIndex()
