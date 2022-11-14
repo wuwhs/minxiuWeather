@@ -18,6 +18,7 @@
   <!-- 实时天气信息 -->
   <view class="now">
     <view class="now-position">
+      <i class="iconfont icon-weizhi"></i>
       <text catchtap="toSearchPage">{{geoDes}}</text>
     </view>
 

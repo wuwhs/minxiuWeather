@@ -8,11 +8,12 @@
 
   <scroll-view scroll-y="{{true}}" class="city-list" scroll-with-animation="{{true}}" scroll-into-view="{{scrollIntoViewId}}" bindscroll="scroll">
     <!-- 猜你想找 -->
-    <view class="city-list-title" id="title_0" ># 猜你想找</view>
+    <view class="city-list-title" id="title_0"># 猜你想找</view>
     <view class="guess-list">
       <view class="guess-line">
-        <view bindtap="tapSetCurPos">定位
-          <!-- <image src="https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/location_s_w.png"/> -->
+        <view bindtap="tapSetCurPos">
+          <i class="iconfont icon-weizhi"></i>
+          定位
         </view>
         <block wx:if="{{filterLine1.length}}">
           <view class="guess-list-item" wx:for="{{filterLine1}}" wx:key="index" data-item="{{item}}" bindtap="tapCityItem">{{item.fullname}}</view>

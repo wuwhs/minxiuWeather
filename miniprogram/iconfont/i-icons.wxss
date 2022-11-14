@@ -7,6 +7,10 @@
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+
+  .icon-weizhi:before {
+    content: "\e6bf";
+  }
   
   .icon-refresh:before {
     content: "\e6a2";

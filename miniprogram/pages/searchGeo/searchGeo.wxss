@@ -43,7 +43,6 @@
   display: block;
   width: 34rpx;
   height: 34rpx;
-  /* background-image: url(https://6465-demo-57510e-1257978613.tcb.qcloud.la/miniWeather/images/icon/search_gray.png); */
   background-repeat: no-repeat;
   background-size: cover;
   top: 50%;
@@ -92,14 +91,16 @@
   font-size: 30rpx;
 }
 
-.guess-line > view {
+.guess-line>view {
   width: 150rpx;
   padding: 10rpx 0;
   margin: 10rpx 20rpx;
-  background-color: rgba(0, 0, 0, .6);
   border-radius: 8rpx;
   text-align: center;
-  box-shadow: 0 0 1rpx 1rpx rgba(0, 0, 0, .4);
+  color: #409eff;
+  background: #ecf5ff;
+  border-color: #b3d8ff;
+  font-size: 30rpx;
 }
 
 .city-list-item {
@@ -151,7 +152,7 @@
   bottom: 0;
   width: 30rpx;
   padding-top: 52rpx;
-  background-color: rgba(0, 0, 0, .2);
+  background-color: #ecf5ff;
   z-index: 10;
 }
 
@@ -160,5 +161,6 @@
 }
 
 .index-item.active {
-  color: #1aad16;
+  color: #409eff;
+  font-weight: bold;
 }
